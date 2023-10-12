@@ -1,0 +1,18 @@
+[versions]
+commons-codec = "1.16.0"
+google-http-client = "1.43.3"
+gson = "2.10.1"
+guava = "32.1.3-jre"
+junit = "5.10.0"
+
+[libraries]
+commons-codec = { module = "commons-codec:commons-codec", version.ref = "commons-codec" }
+google-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+google-guava = { module = "com.google.guava:guava", version.ref = "guava" }
+google-http-client = { module = "com.google.http-client:google-http-client", version.ref = "google-http-client" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+
+[plugins]
+taskinfo = "org.barfuin.gradle.taskinfo:2.1.0"
+version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.1"
+versions = "com.github.ben-manes.versions:0.49.0"

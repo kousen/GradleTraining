@@ -6,6 +6,8 @@
 
 Both `Zip` and `Copy` are built-in Gradle `Task` classes.
 
+The GitHub repository at [Gradle_zip_demo](https://github.com/kousen/gradle_zip_demo) includes both a Groovy and a Kotlin module that shows how to create a Zip and a Jar and then unzip or unjar them using a `Copy` task. The associated video is [here](https://youtu.be/najxvbJwTvY?si=P-1N02b11zkU1Vod).
+
 ## Version Catalogs
 
 Materials in [Reference docs](https://docs.gradle.org/current/userguide/platforms.html#sec:sharing-catalogs).
@@ -25,15 +27,26 @@ For each task that we create:
 * Specify inputs using `@Input`, `@InputFile` or `@InputDirectory` annotations.
 * Specify outputs using `@OutputFile` or `@OutputDirectory` annotations.
 
+## Rich versions DSL
+
+See [this page](https://docs.gradle.org/current/userguide/rich_versions.html) for the complete documentation.
+
+The keywords are:
+
+* `strictly`
+* `prefer`
+* `require`
+* `reject`
+
+Left-square bracket (`[`) means inclusive on the left, but exclusive on the right.
+
 ## JUnit parallel tests
 
-## DSL for dependency constraints
+See the `maxParallelForks` property in the `Test` task, and set it to a value other than 1.
 
 ## Build scans
 
-## Spring Boot builds
-
-## Android builds
+Run any task with the `--scan` option to generate a build scan.
 
 ## Build cache
 
