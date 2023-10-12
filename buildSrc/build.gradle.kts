@@ -1,6 +1,6 @@
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.8.20"
 }
 
 repositories {
@@ -9,8 +9,14 @@ repositories {
 }
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    testImplementation(gradleTestKit())
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
 }
 
 kotlin {
     jvmToolchain(17)
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }

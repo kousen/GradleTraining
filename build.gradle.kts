@@ -1,3 +1,5 @@
+import org.gradle.GreetingTask
+
 plugins {
     application
     `project-report`
@@ -102,15 +104,15 @@ tasks.named<Test>("test") {
     maxParallelForks = Runtime.getRuntime().availableProcessors() / 2 + 1
 }
 
-//tasks.register<GreetingTask>("greeting") {
-//    message = "Hello from Kotlin"
-//    outputFile.set(layout.buildDirectory.file("output.txt"))
-//    doFirst {
-//        println("About to write to ${outputFile.get().asFile.absolutePath}")
-//    }
-//    doLast {
-//        println("Wrote to ${outputFile.get().asFile.absolutePath}")
-//    }
-//}
-//
-// tasks.register<GreetingTask>("hi")
+tasks.register<GreetingTask>("greeting") {
+    message.set("Hello from Kotlin")
+    outputFile.set(layout.buildDirectory.file("output.txt"))
+    doFirst {
+        println("About to write to ${outputFile.get().asFile.absolutePath}")
+    }
+    doLast {
+        println("Wrote to ${outputFile.get().asFile.absolutePath}")
+    }
+}
+
+tasks.register<GreetingTask>("hi")

@@ -1,3 +1,5 @@
+package org.gradle
+
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -8,18 +10,16 @@ import org.gradle.api.tasks.TaskAction
 // Custom task
 abstract class GreetingTask : DefaultTask() {
     @get:Input
-    abstract val message: Property<String>
+    val message: Property<String> = project.objects.property(String::class.java)
+            .convention("Hello from Gradle")
 
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    val outputFile: RegularFileProperty = project.objects.fileProperty()
+            .convention(project.layout.buildDirectory.file("output.txt"))
 
     init {
         group = "custom"
         description = "Writes a greeting to the specified file"
-        message.convention("Hello from Gradle")
-        outputFile.convention(
-                project.layout.buildDirectory.file("output.txt")
-        )
     }
 
     @TaskAction
