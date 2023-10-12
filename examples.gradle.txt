@@ -1,12 +1,49 @@
 plugins {
     application
     `project-report`
+    `maven-publish`
     alias(libs.plugins.taskinfo)
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+
+    maven {
+        url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
+        credentials {
+            username = "user"
+            password = "p@ssw0rd"
+        }
+    }
+}
+
+tasks.register<Copy>("unjar") {
+    dependsOn(tasks.named<Jar>("jar"))
+    from(zipTree(tasks.named<Jar>("jar").get().archiveFile.get()))
+    into(layout.buildDirectory.dir("unpacked"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "org.gradle.sample"
+            artifactId = "library"
+            version = "1.1"
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url = uri(layout.buildDirectory.dir("repo"))
+            credentials {
+                username = "user"
+                password = project.properties["NEXUS_PASSWORD"] as String? ?: "password"
+            }
+        }
+    }
 }
 
 val user: String by extra
@@ -90,7 +127,7 @@ abstract class GreetingTask : DefaultTask() {
         description = "Writes a greeting to the specified file"
         message.convention("Hello from Gradle")
         outputFile.convention(
-                project.layout.buildDirectory.file("output.txt")
+            project.layout.buildDirectory.file("output.txt")
         )
     }
 

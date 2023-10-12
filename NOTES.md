@@ -1,6 +1,10 @@
 # Notes and Other Topics
 
-## Zip and Copy tasks
+## File manipulation
+
+- Zip and Copy tasks
+
+Both `Zip` and `Copy` are built-in Gradle `Task` classes.
 
 ## Version Catalogs
 
